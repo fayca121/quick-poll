@@ -1,4 +1,4 @@
-package dz.bououza.quickpoll.controller;
+package dz.bououza.quickpoll.v2.controller;
 
 import dz.bououza.quickpoll.domain.Vote;
 import dz.bououza.quickpoll.dto.OptionCount;
@@ -7,11 +7,15 @@ import dz.bououza.quickpoll.repository.VoteRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@RestController("ComputeResultControllerV2")
+@RequestMapping("/v2")
 public class ComputeResultController {
     private final VoteRepository voteRepository;
 

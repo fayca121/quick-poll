@@ -1,4 +1,4 @@
-package dz.bououza.quickpoll.controller;
+package dz.bououza.quickpoll.v2.controller;
 
 import dz.bououza.quickpoll.domain.Vote;
 import dz.bououza.quickpoll.repository.VoteRepository;
@@ -8,7 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-@RestController
+@RestController("VoteControllerV2")
+@RequestMapping("/v2")
 public class VoteController {
     private final VoteRepository repository;
 

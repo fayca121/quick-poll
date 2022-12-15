@@ -1,4 +1,4 @@
-package dz.bououza.quickpoll.controller;
+package dz.bououza.quickpoll.v2.controller;
 
 import dz.bououza.quickpoll.domain.Poll;
 import dz.bououza.quickpoll.exception.ResourceNotFoundException;
@@ -13,7 +13,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.Optional;
 
-@RestController
+@RestController("PollControllerV2")
+@RequestMapping("/v2")
 public class PollController {
     private final PollRepository pollRepository;
 
