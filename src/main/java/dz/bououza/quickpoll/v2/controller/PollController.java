@@ -4,6 +4,8 @@ import dz.bououza.quickpoll.domain.Poll;
 import dz.bououza.quickpoll.exception.ResourceNotFoundException;
 import dz.bououza.quickpoll.v2.repository.PollRepository;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +25,8 @@ public class PollController {
     }
 
     @GetMapping("/polls")
-    public ResponseEntity<Iterable<Poll>> getAllPolls(){
-        Iterable<Poll> polls=pollRepository.findAll();
+    public ResponseEntity<Page<Poll>> getAllPolls(Pageable pageable){
+        Page<Poll> polls=pollRepository.findAll(pageable);
         return new ResponseEntity<>(polls, HttpStatus.OK);
     }
 
