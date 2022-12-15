@@ -3,7 +3,7 @@ package dz.bououza.quickpoll.v1.controller;
 import dz.bououza.quickpoll.domain.Vote;
 import dz.bououza.quickpoll.dto.OptionCount;
 import dz.bououza.quickpoll.dto.VoteResult;
-import dz.bououza.quickpoll.repository.VoteRepository;
+import dz.bououza.quickpoll.v1.repository.VoteRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
