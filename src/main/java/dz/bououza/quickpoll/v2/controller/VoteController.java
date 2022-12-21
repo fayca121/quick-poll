@@ -1,7 +1,6 @@
 package dz.bououza.quickpoll.v2.controller;
 
 import dz.bououza.quickpoll.domain.Vote;
-import dz.bououza.quickpoll.v2.repository.VoteRepository;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

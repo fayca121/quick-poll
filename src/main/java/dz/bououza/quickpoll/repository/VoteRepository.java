@@ -1,4 +1,4 @@
-package dz.bououza.quickpoll.v1.repository;
+package dz.bououza.quickpoll.repository;
 
 import dz.bououza.quickpoll.domain.Vote;
 import org.springframework.data.jpa.repository.Query;
