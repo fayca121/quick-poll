@@ -25,7 +25,6 @@ public class ComputeResultController {
 
     @GetMapping("/computeresult")
     public ResponseEntity<?> computeResult(@RequestParam Long pollId){
-        VoteResult voteResult =new VoteResult();
         Iterable<Vote> votes = voteRepository.findByPoll(pollId);
         int totalVotes=0;
         Map<Long, OptionCount> tempMap=new HashMap<>();
@@ -43,8 +42,6 @@ public class ComputeResultController {
                tempMap.put(optionId,optionCount);
            }
        }
-       voteResult.setTotalVotes(totalVotes);
-       voteResult.setResults(tempMap.values());
-       return new ResponseEntity<>(voteResult, HttpStatus.OK);
+       return new ResponseEntity<>(new VoteResult(totalVotes,tempMap.values()), HttpStatus.OK);
     }
 }
