@@ -46,7 +46,7 @@ public class PollController {
     @GetMapping("/polls/{pollId}")
     public ResponseEntity<?> getPoll(@PathVariable Long pollId) throws Exception {
         Optional<Poll> poll= pollRepository.findById(pollId);
-        if(!poll.isPresent())
+        if(poll.isEmpty())
             throw new ResourceNotFoundException("Poll with Id: "+pollId+" not found!");
         return new ResponseEntity<>(poll.get(),HttpStatus.OK);
     }
