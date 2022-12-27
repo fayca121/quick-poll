@@ -3,6 +3,8 @@ package dz.bououza.quickpoll.v3.controller;
 import dz.bououza.quickpoll.domain.Poll;
 import dz.bououza.quickpoll.exception.ResourceNotFoundException;
 import dz.bououza.quickpoll.v2.repository.PollRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,7 @@ import java.util.Optional;
 
 @RestController("PollControllerV3")
 @RequestMapping("/v3")
+@Tag(name = "Polls",description = "Poll API v3")
 public class PollController {
     private final PollRepository pollRepository;
 
@@ -25,12 +28,14 @@ public class PollController {
     }
 
     @GetMapping("/polls")
+    @Operation(summary = "Retrieves all the polls")
     public ResponseEntity<Page<Poll>> getAllPolls(Pageable pageable){
         Page<Poll> polls=pollRepository.findAll(pageable);
         return new ResponseEntity<>(polls, HttpStatus.OK);
     }
 
     @PostMapping("/polls")
+    @Operation(summary = "Create a new poll")
     public ResponseEntity<?> createPoll(@Valid @RequestBody Poll poll){
         poll = pollRepository.save(poll);
         HttpHeaders responseHeaders = new HttpHeaders();
@@ -44,6 +49,7 @@ public class PollController {
     }
 
     @GetMapping("/polls/{pollId}")
+    @Operation(summary = "Retrieves a poll associated with the pollId")
     public ResponseEntity<?> getPoll(@PathVariable Long pollId) throws Exception {
         Optional<Poll> poll= pollRepository.findById(pollId);
         if(poll.isEmpty())
@@ -52,6 +58,7 @@ public class PollController {
     }
 
     @PutMapping("/polls/{pollId}")
+    @Operation(summary = "Update a poll associated with pollId")
     public ResponseEntity<?> updatePoll(@RequestBody Poll poll,@PathVariable Long pollId){
         poll.setId(pollId);
         poll = pollRepository.save(poll);
@@ -59,9 +66,10 @@ public class PollController {
     }
 
     @DeleteMapping("polls/{pollId}")
+    @Operation(summary = "Delete a poll associated with pollId")
     public ResponseEntity<?> deletePoll(@PathVariable Long pollId){
         pollRepository.deleteById(pollId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

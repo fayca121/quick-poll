@@ -3,6 +3,7 @@ package dz.bououza.quickpoll.v2.controller;
 import dz.bououza.quickpoll.domain.Poll;
 import dz.bououza.quickpoll.exception.ResourceNotFoundException;
 import dz.bououza.quickpoll.v2.repository.PollRepository;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,7 @@ import java.util.Optional;
 
 @RestController("PollControllerV2")
 @RequestMapping("/v2")
+@Tag(name = "Polls",description = "Poll API v2")
 public class PollController {
     private final PollRepository pollRepository;
 
