@@ -2,7 +2,7 @@ package dz.bououza.quickpoll.v3.controller;
 
 import dz.bououza.quickpoll.domain.Poll;
 import dz.bououza.quickpoll.exception.ResourceNotFoundException;
-import dz.bououza.quickpoll.v2.repository.PollRepository;
+import dz.bououza.quickpoll.repository.PollRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
