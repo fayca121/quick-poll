@@ -1,9 +1,6 @@
 package dz.bououza.quickpoll.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,16 +10,16 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "users")
 public class User implements UserDetails {
     @Id
     @GeneratedValue
+    @Column(name = "USER_ID")
     private Long id;
-    @Column(unique = true,nullable = false)
-    private String email;
-    @Column(unique = true,nullable = false)
+    @Column(name = "USERNAME",unique = true,nullable = false)
     private String userName;
 
-    @Column(nullable = false)
+    @Column(name = "PASSWORD",nullable = false)
     private String password;
 
     @Column(nullable = false)
@@ -60,7 +57,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     public Long getId() {
@@ -71,24 +68,16 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id.equals(user.id) && email.equals(user.email) && userName.equals(user.userName);
+        return id.equals(user.id) && userName.equals(user.userName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, userName);
+        return Objects.hash(id, userName);
     }
 }
