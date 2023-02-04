@@ -1,4 +1,4 @@
-package dz.bououza.quickpoll.v3.controller;
+package dz.bououza.quickpoll.controller;
 
 import dz.bououza.quickpoll.dto.VoteResult;
 import dz.bououza.quickpoll.service.ComputeResultService;
@@ -6,12 +6,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("ComputeResultControllerV3")
-@RequestMapping("/v3")
+@RestController("ComputeResultController")
 @RequiredArgsConstructor
 public class ComputeResultController {
     private final ComputeResultService service;
