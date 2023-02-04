@@ -31,7 +31,7 @@ public class ComputeResultServiceImpl implements ComputeResultService {
             } else {
                 OptionCount optionCount = new OptionCount();
                 optionCount.setOptionId(optionId);
-                optionCount.setCount(0);
+                optionCount.setCount(1);
                 tempMap.put(optionId, optionCount);
             }
         }
