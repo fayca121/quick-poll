@@ -17,6 +17,13 @@ public class Option {
     @Column(name = "OPTION_VALUE")
     private String value;
 
+    public Option() {
+    }
+
+    public Option(String value) {
+        this.value = value;
+    }
+
     public Long getId() {
         return id;
     }
