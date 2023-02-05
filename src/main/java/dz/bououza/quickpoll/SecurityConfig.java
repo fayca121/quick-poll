@@ -40,7 +40,7 @@ public class SecurityConfig {
     public SecurityFilterChain configure(HttpSecurity http) throws Exception{
         return http.csrf().disable()
                 .authorizeHttpRequests(request ->
-                        request.requestMatchers("/v1/**","/v2/**","/swagger-ui/**","/api-docs/**")
+                        request.requestMatchers("/swagger-ui/**","/api-docs/**")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated())
