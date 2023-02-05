@@ -20,6 +20,11 @@ public class Option {
     public Option() {
     }
 
+    public Option(Long id, String value) {
+        this.id = id;
+        this.value = value;
+    }
+
     public Option(String value) {
         this.value = value;
     }
