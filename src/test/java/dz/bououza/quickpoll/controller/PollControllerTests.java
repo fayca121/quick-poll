@@ -22,10 +22,8 @@ import java.util.HashSet;
 import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.BDDMockito.any;
-import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.mockito.BDDMockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -78,7 +76,7 @@ public class PollControllerTests {
     }
 
     @Test
-    public void givenNewPoll_whenCreatePoll_thenSavePoll() throws Exception {
+    public void givenNewPoll_whenCreatePoll_thenReturn201() throws Exception {
 
         //given
         given(pollRepository.save(any(Poll.class))).willReturn(poll);
@@ -110,6 +108,46 @@ public class PollControllerTests {
                 .andExpect(jsonPath("$.id",is(poll.getId().intValue())))
                 .andExpect(jsonPath("$.question",is(poll.getQuestion())))
                 .andExpect(jsonPath("$.options.size()",is(2)));
+    }
+
+    @Test
+    public void givenNotExistingPollId_whenGetPoll_thenReturn400() throws Exception {
+        //given
+        given(pollRepository.findById(any(Long.class))).willReturn(Optional.empty());
+
+        //when
+        ResultActions response = mockMvc.perform(get("/polls/{pollId}",poll.getId()));
+
+        //then
+        response.andExpect(status().isNotFound())
+                .andDo(print());
+
+    }
+
+    @Test
+    public void givenPollAndPollId_whenUpdatePoll_thenReturn200() throws Exception {
+        //given
+        given(pollRepository.save(any(Poll.class))).willReturn(poll);
+
+        //when
+        ResultActions response= mockMvc.perform(put("/polls/{pollId}",poll.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(poll)));
+        //then
+        response.andExpect(status().isOk()).andDo(print());
+    }
+
+    @Test
+    public void givenPollId_whenCallDeletePoll_thenReturn204() throws Exception {
+        //given
+        willDoNothing().given(pollRepository).deleteById(any(Long.class));
+
+        //when
+        ResultActions response = mockMvc.perform(delete("/polls/{pollId}",poll.getId()));
+
+        //then
+        response.andExpect(status().isNoContent()).andDo(print());
+
     }
 
     
