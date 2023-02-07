@@ -17,6 +17,17 @@ pipeline {
             }
         }
 
+        stage("Code coverage"){
+            steps {
+                sh './mvnw verify'
+                publishHTML (target: [
+                    reportDir: 'target/site/jacoco/',
+                    reportFiles: 'index.html',
+                    reportName: 'JaCoCo Report'
+                    ])
+                }
+            }
+
         stage("Build") {
             steps {
                 sh './mvnw -DskipTests package'
