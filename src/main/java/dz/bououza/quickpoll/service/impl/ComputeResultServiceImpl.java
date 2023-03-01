@@ -5,17 +5,19 @@ import dz.bououza.quickpoll.dto.OptionCount;
 import dz.bououza.quickpoll.dto.VoteResult;
 import dz.bououza.quickpoll.repository.VoteRepository;
 import dz.bououza.quickpoll.service.ComputeResultService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
-@RequiredArgsConstructor
 public class ComputeResultServiceImpl implements ComputeResultService {
 
     private final VoteRepository voteRepository;
+
+    public ComputeResultServiceImpl(VoteRepository voteRepository) {
+        this.voteRepository = voteRepository;
+    }
 
     @Override
     public VoteResult computeResult(Long pollId) {

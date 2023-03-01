@@ -25,6 +25,6 @@ public class RestExceptionHandler {
             requestPath = request.getRequestURI();
         errorDetail.setPath(requestPath);
         errorDetail.setDeveloperMessage(ex.getClass().getName());
-        return new ResponseEntity<>(errorDetail, null, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorDetail, HttpStatus.NOT_FOUND);
     }
 }
