@@ -112,9 +112,9 @@ insert into option (option_id, option_value, poll_id) values (72, '8', 20);
 insert into option (option_id, option_value, poll_id) values (73, '5', 20);
 insert into option (option_id, option_value, poll_id) values (74, '4', 20);
 
-insert into users (user_id, username, password, role) values (1, 'mickey', '$2a$10$/C6/YeUgVDJIL2Hi5IqZhu88VdAScc0QpjnuIsV3CBYcwN/6pfwD.', 'ROLE_USER');
-insert into users (user_id, username, password, role) values (2, 'minnie', '$2a$10$wTWs.jNbEEZhAtk.1416/ePPFKrakDnwpLXZf7IUQ6Vylf2UnT7n2', 'ROLE_USER');
-insert into users (user_id, username, password,  role) values (3, 'donald', '$2a$10$yTBFK2dxVHSD0jBv5kEyoOF/3vbvMrBXhSfZ04EVdwqaor3akrjtq', 'ROLE_USER');
-insert into users (user_id, username, password,  role) values (4, 'daisy', '$2a$10$ZnjF8/Vg7E2qRKazAfaMmeAIZ0CK3s74XyKquKU.fBLNBNwy3v/FK', 'ROLE_USER');
-insert into users (user_id, username, password,  role) values (5, 'clarabelle', '$2a$10$kRWOpd5XssG00Q1bcUVIpePWfm3zKJTH0N6yDpRJYDH.a5U5po4Ji','ROLE_USER');
-insert into users (user_id, username, password,  role) values (6, 'admin', '$2a$10$dx3KtYmwEJVsL1lhxx8.wu5dKbvnkmPuEpzMm3G.WlO7ysT9iqgLm', 'ROLE_ADMIN');
+--insert into users (user_id, username, password, role) values (1, 'mickey', '$2a$10$/C6/YeUgVDJIL2Hi5IqZhu88VdAScc0QpjnuIsV3CBYcwN/6pfwD.', 'ROLE_USER');
+--insert into users (user_id, username, password, role) values (2, 'minnie', '$2a$10$wTWs.jNbEEZhAtk.1416/ePPFKrakDnwpLXZf7IUQ6Vylf2UnT7n2', 'ROLE_USER');
+--insert into users (user_id, username, password,  role) values (3, 'donald', '$2a$10$yTBFK2dxVHSD0jBv5kEyoOF/3vbvMrBXhSfZ04EVdwqaor3akrjtq', 'ROLE_USER');
+--insert into users (user_id, username, password,  role) values (4, 'daisy', '$2a$10$ZnjF8/Vg7E2qRKazAfaMmeAIZ0CK3s74XyKquKU.fBLNBNwy3v/FK', 'ROLE_USER');
+--insert into users (user_id, username, password,  role) values (5, 'clarabelle', '$2a$10$kRWOpd5XssG00Q1bcUVIpePWfm3zKJTH0N6yDpRJYDH.a5U5po4Ji','ROLE_USER');
+--insert into users (user_id, username, password,  role) values (6, 'admin', '$2a$10$dx3KtYmwEJVsL1lhxx8.wu5dKbvnkmPuEpzMm3G.WlO7ysT9iqgLm', 'ROLE_ADMIN');
