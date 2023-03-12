@@ -1,8 +1,7 @@
 package dz.bououza.quickpoll.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dz.bououza.quickpoll.domain.Option;
+import dz.bououza.quickpoll.domain.Proposal;
 import dz.bououza.quickpoll.domain.Vote;
 import dz.bououza.quickpoll.repository.VoteRepository;
 import org.junit.jupiter.api.Test;
@@ -42,15 +41,15 @@ public class VoteControllerTests {
         //given
         Vote vote =new Vote();
         vote.setId(100L);
-        vote.setOption(new Option(1000L,"option1"));
+        vote.setProposal(new Proposal(1000L,"option1"));
 
         Vote vote1 =new Vote();
         vote.setId(101L);
-        vote.setOption(new Option(1001L,"option2"));
+        vote.setProposal(new Proposal(1001L,"option2"));
 
         Vote vote2 =new Vote();
         vote.setId(102L);
-        vote.setOption(new Option(1002L,"option3"));
+        vote.setProposal(new Proposal(1002L,"option3"));
 
         List<Vote> votes = Arrays.asList(vote,vote1,vote2);
         given(repository.findByPoll(any(Long.class))).willReturn(votes);
@@ -69,7 +68,7 @@ public class VoteControllerTests {
         //given
         Vote vote=new Vote();
         vote.setId(100L);
-        vote.setOption(new Option(1000L,"option1"));
+        vote.setProposal(new Proposal(1000L,"option1"));
 
         given(repository.save(any(Vote.class))).willReturn(vote);
 

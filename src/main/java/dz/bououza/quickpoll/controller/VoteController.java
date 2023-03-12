@@ -13,16 +13,16 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RestController("VoteController")
 @Tag(name = "Votes",description = "Vote API")
 public class VoteController {
-    private final VoteRepository repository;
+    private final VoteRepository voteRepository;
 
-    public VoteController(VoteRepository repository) {
-        this.repository = repository;
+    public VoteController(VoteRepository voteRepository) {
+        this.voteRepository = voteRepository;
     }
 
     @PostMapping("/polls/{pollId}/votes")
     @Operation(summary = "Create a new vote associated with pollId")
     public ResponseEntity<?> createVote(@PathVariable Long pollId, @RequestBody Vote vote){
-        vote = repository.save(vote);
+        vote = voteRepository.save(vote);
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.setLocation(ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -35,7 +35,7 @@ public class VoteController {
     @GetMapping("/polls/{pollId}/votes")
     @Operation(summary = "Retrieves all the votes associated with pollId")
     public Iterable<Vote> getAllVotes(@PathVariable Long pollId){
-        return repository.findByPoll(pollId);
+        return voteRepository.findByPoll(pollId);
     }
 
 

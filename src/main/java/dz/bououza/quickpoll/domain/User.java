@@ -13,7 +13,7 @@ import java.util.Objects;
 @Table(name = "users")
 public class User implements UserDetails {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_ID")
     private Long id;
     @Column(name = "USERNAME",unique = true,nullable = false)

@@ -1,7 +1,7 @@
 package dz.bououza.quickpoll.service.impl;
 
 import dz.bououza.quickpoll.domain.Vote;
-import dz.bououza.quickpoll.dto.OptionCount;
+import dz.bououza.quickpoll.dto.ProposalCount;
 import dz.bououza.quickpoll.dto.VoteResult;
 import dz.bououza.quickpoll.repository.VoteRepository;
 import dz.bououza.quickpoll.service.ComputeResultService;
@@ -23,18 +23,18 @@ public class ComputeResultServiceImpl implements ComputeResultService {
     public VoteResult computeResult(Long pollId) {
         Iterable<Vote> votes = voteRepository.findByPoll(pollId);
         int totalVotes=0;
-        Map<Long, OptionCount> tempMap=new HashMap<>();
+        Map<Long, ProposalCount> tempMap=new HashMap<>();
         for(Vote vote: votes) {
             totalVotes++;
-            Long optionId = vote.getOption().getId();
-            if (tempMap.containsKey(optionId)) {
-                OptionCount optionCount = tempMap.get(optionId);
-                optionCount.setCount(optionCount.getCount() + 1);
+            Long proposalId = vote.getProposal().getId();
+            if (tempMap.containsKey(proposalId)) {
+                ProposalCount proposalCount = tempMap.get(proposalId);
+                proposalCount.setCount(proposalCount.getCount() + 1);
             } else {
-                OptionCount optionCount = new OptionCount();
-                optionCount.setOptionId(optionId);
-                optionCount.setCount(1);
-                tempMap.put(optionId, optionCount);
+                ProposalCount proposalCount = new ProposalCount();
+                proposalCount.setProposalId(proposalId);
+                proposalCount.setCount(1);
+                tempMap.put(proposalId, proposalCount);
             }
         }
             return new VoteResult(totalVotes,tempMap.values());

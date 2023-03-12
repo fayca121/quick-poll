@@ -7,12 +7,12 @@ import java.util.Objects;
 @Entity
 public class Vote {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "VOTE_ID")
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "OPTION_ID")
-    private Option option;
+    @JoinColumn(name = "PROPOSAL_ID")
+    private Proposal proposal;
 
     public Long getId() {
         return id;
@@ -22,12 +22,12 @@ public class Vote {
         this.id = id;
     }
 
-    public Option getOption() {
-        return option;
+    public Proposal getProposal() {
+        return proposal;
     }
 
-    public void setOption(Option option) {
-        this.option = option;
+    public void setProposal(Proposal proposal) {
+        this.proposal = proposal;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class Vote {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Vote vote = (Vote) o;
-        return id.equals(vote.id) && Objects.equals(option, vote.option);
+        return id.equals(vote.id) && Objects.equals(proposal, vote.proposal);
     }
 
     @Override

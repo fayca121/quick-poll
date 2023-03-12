@@ -1,8 +1,8 @@
 package dz.bououza.quickpoll.service;
 
-import dz.bououza.quickpoll.domain.Option;
+import dz.bououza.quickpoll.domain.Proposal;
 import dz.bououza.quickpoll.domain.Vote;
-import dz.bououza.quickpoll.dto.OptionCount;
+import dz.bououza.quickpoll.dto.ProposalCount;
 import dz.bououza.quickpoll.dto.VoteResult;
 import dz.bououza.quickpoll.repository.VoteRepository;
 import dz.bououza.quickpoll.service.impl.ComputeResultServiceImpl;
@@ -34,19 +34,19 @@ public class ComputeResultServiceTests {
     public void givenVotesList_whenComputeResult_thenOptionsWithVotes(){
 
         //given
-        Option option1 = new Option(OPTION1);
-        option1.setId(1000L);
-        Option option2 =new Option(OPTION2);
-        option2.setId(1001L);
+        Proposal proposal1 = new Proposal(OPTION1);
+        proposal1.setId(1000L);
+        Proposal proposal2 =new Proposal(OPTION2);
+        proposal2.setId(1001L);
 
         Vote vote1=new Vote();
-        vote1.setOption(option1);
+        vote1.setProposal(proposal1);
 
         Vote vote2=new Vote();
-        vote2.setOption(option1);
+        vote2.setProposal(proposal1);
 
         Vote vote3=new Vote();
-        vote3.setOption(option2);
+        vote3.setProposal(proposal2);
 
         Iterable<Vote> votes = Arrays.asList(vote1,vote2,vote3);
 
@@ -54,17 +54,17 @@ public class ComputeResultServiceTests {
 
         //when
         VoteResult voteResult = computeResultService.computeResult(100L);
-        Collection<OptionCount> optionCounts = voteResult.results();
+        Collection<ProposalCount> proposalCounts = voteResult.results();
         assertThat(voteResult.totalVotes()).isEqualTo(3);
-        assertThat(optionCounts).isNotEmpty();
-        assertThat(getOptionCount(option1,optionCounts).getCount()).isEqualTo(2);
-        assertThat(getOptionCount(option2,optionCounts).getCount()).isEqualTo(1);
+        assertThat(proposalCounts).isNotEmpty();
+        assertThat(getOptionCount(proposal1, proposalCounts).getCount()).isEqualTo(2);
+        assertThat(getOptionCount(proposal2, proposalCounts).getCount()).isEqualTo(1);
 
     }
 
-    private OptionCount getOptionCount(Option option, Collection<OptionCount> optionCounts){
-        return optionCounts.stream()
-                .filter(optionCount -> optionCount.getOptionId().equals(option.getId()))
+    private ProposalCount getOptionCount(Proposal proposal, Collection<ProposalCount> proposalCounts){
+        return proposalCounts.stream()
+                .filter(proposalCount -> proposalCount.getProposalId().equals(proposal.getId()))
                 .findFirst().orElse(null);
     }
 

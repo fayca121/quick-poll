@@ -1,6 +1,6 @@
 package dz.bououza.quickpoll.repository;
 
-import dz.bououza.quickpoll.domain.Option;
+import dz.bououza.quickpoll.domain.Proposal;
 import dz.bououza.quickpoll.domain.Poll;
 import dz.bououza.quickpoll.domain.Vote;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,21 +41,21 @@ public class VoteRepositoryTests {
         //Given Poll, options, votes
         Poll poll = new Poll();
         poll.setQuestion("Question");
-        poll.setOptions(new HashSet<>(Arrays.asList(new Option(OPTION1),
-                new Option(OPTION2))));
+        poll.setProposals(new HashSet<>(Arrays.asList(new Proposal(OPTION1),
+                new Proposal(OPTION2))));
         poll = pollRepository.save(poll);
 
-        for(Option op: poll.getOptions()){
+        for(Proposal op: poll.getProposals()){
             if(op.getValue().equals(OPTION1)){
                 Vote v1 = new Vote();
-                v1.setOption(op);
+                v1.setProposal(op);
                 Vote v2 =new Vote();
-                v2.setOption(op);
+                v2.setProposal(op);
                 voteRepository.saveAll(Arrays.asList(v1,v2));
             }
             else if(op.getValue().equals(OPTION2)){
                 Vote v =new Vote();
-                v.setOption(op);
+                v.setProposal(op);
                 voteRepository.save(v);
             }
             
@@ -65,7 +65,7 @@ public class VoteRepositoryTests {
         Iterable<Vote> votes = voteRepository.findByPoll(poll.getId());
 
         Map<String,Long> result = StreamSupport.stream(votes.spliterator(), false)
-                .map(v -> v.getOption().getValue())
+                .map(v -> v.getProposal().getValue())
                 .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
 
         assertThat(result.get(OPTION1)).isNotNull();

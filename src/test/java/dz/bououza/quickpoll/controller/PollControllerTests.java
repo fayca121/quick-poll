@@ -1,7 +1,7 @@
 package dz.bououza.quickpoll.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dz.bououza.quickpoll.domain.Option;
+import dz.bououza.quickpoll.domain.Proposal;
 import dz.bououza.quickpoll.domain.Poll;
 import dz.bououza.quickpoll.repository.PollRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,8 +47,8 @@ public class PollControllerTests {
         poll = new Poll();
         poll.setId(100L);
         poll.setQuestion("Question1");
-        poll.setOptions(new HashSet<>(Arrays.asList(new Option(1000L, "option1"),
-                new Option(1001L, "option2"))));
+        poll.setProposals(new HashSet<>(Arrays.asList(new Proposal(1000L, "option1"),
+                new Proposal(1001L, "option2"))));
     }
 
     @Test
@@ -59,8 +59,8 @@ public class PollControllerTests {
         Poll poll2 = new Poll();
         poll2.setId(101L);
         poll2.setQuestion("Question2");
-        poll2.setOptions(new HashSet<>(Arrays.asList(new Option(2000L, "optionA"),
-                new Option(2001L, "optionB"))));
+        poll2.setProposals(new HashSet<>(Arrays.asList(new Proposal(2000L, "optionA"),
+                new Proposal(2001L, "optionB"))));
 
         Page<Poll> pollPage = new PageImpl<>(Arrays.asList(poll, poll2));
 
@@ -107,7 +107,7 @@ public class PollControllerTests {
                 .andDo(print())
                 .andExpect(jsonPath("$.id",is(poll.getId().intValue())))
                 .andExpect(jsonPath("$.question",is(poll.getQuestion())))
-                .andExpect(jsonPath("$.options.size()",is(2)));
+                .andExpect(jsonPath("$.proposals.size()",is(2)));
     }
 
     @Test

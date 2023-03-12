@@ -1,31 +1,28 @@
 package dz.bououza.quickpoll.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
 @Entity
-public class Option {
+public class Proposal {
     @Id
-    @GeneratedValue
-    @Column(name = "OPTION_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PROPOSAL_ID")
     private Long id;
 
-    @Column(name = "OPTION_VALUE")
+    @Column(name = "PROPOSAL_VALUE")
     private String value;
 
-    public Option() {
+    public Proposal() {
     }
 
-    public Option(Long id, String value) {
+    public Proposal(Long id, String value) {
         this.id = id;
         this.value = value;
     }
 
-    public Option(String value) {
+    public Proposal(String value) {
         this.value = value;
     }
 
@@ -49,8 +46,8 @@ public class Option {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Option option = (Option) o;
-        return id.equals(option.id) && Objects.equals(value, option.value);
+        Proposal proposal = (Proposal) o;
+        return id.equals(proposal.id) && Objects.equals(value, proposal.value);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package dz.bououza.quickpoll.controller;
 
-import dz.bououza.quickpoll.dto.OptionCount;
+import dz.bououza.quickpoll.dto.ProposalCount;
 import dz.bououza.quickpoll.dto.VoteResult;
 import dz.bououza.quickpoll.service.ComputeResultService;
 import org.junit.jupiter.api.Test;
@@ -34,9 +34,9 @@ public class ComputeResultControllerTests {
     @Test
     public void givenPollId_whenComputeResult_thenVoteResult() throws Exception {
         //given
-        Collection<OptionCount> optionCounts =
-                Arrays.asList(new OptionCount(100L,2),new OptionCount(101L,1));
-        VoteResult voteResult = new VoteResult(3,optionCounts);
+        Collection<ProposalCount> proposalCounts =
+                Arrays.asList(new ProposalCount(100L,2),new ProposalCount(101L,1));
+        VoteResult voteResult = new VoteResult(3, proposalCounts);
 
         //when
         given(computeResultService.computeResult(100L)).willReturn(voteResult);
@@ -46,7 +46,7 @@ public class ComputeResultControllerTests {
         response.andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(jsonPath("$.totalVotes",is(voteResult.totalVotes())))
-                .andExpect(jsonPath("$.results.size()",is(optionCounts.size())));
+                .andExpect(jsonPath("$.results.size()",is(proposalCounts.size())));
     }
 
 
