@@ -1,6 +1,8 @@
 package dz.bououza.quickpoll.controller;
 
+import dz.bououza.quickpoll.dto.JWTAuthResponse;
 import dz.bououza.quickpoll.dto.UserDto;
+import dz.bououza.quickpoll.security.JwtTokenProvider;
 import dz.bououza.quickpoll.service.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,22 +22,31 @@ public class AuthController {
     private final AuthService authService;
     private final AuthenticationManager authenticationManager;
 
+    private final JwtTokenProvider jwtTokenProvider;
+
     public AuthController(AuthService authService,
-                          AuthenticationManager authenticationManager) {
+                          AuthenticationManager authenticationManager,
+                          JwtTokenProvider jwtTokenProvider) {
         this.authService = authService;
-        this.authenticationManager=authenticationManager;
+        this.authenticationManager = authenticationManager;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
 
-    @PostMapping(value = {"/login","/signin"})
-    public ResponseEntity<String> login(@RequestBody UserDto userDto){
-        Authentication authentication= authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(userDto.username(),userDto.password()));
+    @PostMapping(value = {"/login", "/signin"})
+    public ResponseEntity<JWTAuthResponse> login(@RequestBody UserDto userDto) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(userDto.username(), userDto.password()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return ResponseEntity.ok("User successfully authenticated");
+        String token = jwtTokenProvider.generateToken(authentication);
+        JWTAuthResponse jwtAuthResponse = new JWTAuthResponse();
+        jwtAuthResponse.setAccessToken(token);
+        jwtAuthResponse.setIssued(jwtTokenProvider.getIssuedDate(token));
+        jwtAuthResponse.setExpiration(jwtTokenProvider.getExpirationDate(token));
+        return ResponseEntity.ok(jwtAuthResponse);
     }
 
-    @PostMapping( value = {"/register","/signup"})
-    public ResponseEntity<String> register(@RequestBody UserDto userDto){
+    @PostMapping(value = {"/register", "/signup"})
+    public ResponseEntity<String> register(@RequestBody UserDto userDto) {
         String response = authService.register(userDto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
